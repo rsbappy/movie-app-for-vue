@@ -6,10 +6,10 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <header>
   <router-link :to="{name:'home'}">
-    <h1>Movies <span>App</span></h1>
+    <h1 >Movies <span>App</span></h1>
   </router-link>
 </header>
-  <main>
+  <main class="container">
     <router-view>
 
     </router-view>
@@ -58,5 +58,11 @@ h1{
   span{
     color: #34d399;
   }
+}
+
+.container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

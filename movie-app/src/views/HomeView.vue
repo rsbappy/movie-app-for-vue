@@ -1,5 +1,10 @@
 <script setup>
-    import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
+
+import { useMovieStore } from "../stores/movie"
+
+const movieStore = useMovieStore();
+
 
 </script>
 
@@ -12,7 +17,7 @@
              <img src="https://m.media-amazon.com/images/M/MV5BMzA0YWMwMTUtMTVhNC00NjRkLWE2ZTgtOWEzNjJhYzNiMTlkXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"
                   alt="movie-img" class="freatured-movie-img">
 
-         <div class="movie-detail">
+         <div v class="movie-detail">
              <h3>Super Man </h3>
              <p>An alien orphan is sent from his dying planet to Earth, where he grows up to become his adoptive home's
                  first and greatest superhero.</p>
@@ -21,26 +26,26 @@
         </router-link>
         </div>
 
-        <form action="" class="search-box">
+        <form  @submit.prevent="movieStore.searchMovies" class="search-box">
           <div>
-            <input type="text" placeholder="Search the movie">
+            <input type="text" placeholder="Search the movie" v-model="movieStore.search" >
             <button type="submit">Search</button>
           </div>
         </form>
         <div class="movie-list">
-          <div class="movie">
-            <router-link to="/movie/tt0078346" class="movie-link">
+          <div class="movie" v-for="movie in movieStore.movies" :key="movie.imdbID" >
+            <router-link to="/movie/" class="movie-link">
               <div class="movie-image">
-                <img src="https://m.media-amazon.com/images/M/MV5BMzA0YWMwMTUtMTVhNC00NjRkLWE2ZTgtOWEzNjJhYzNiMTlkXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg" alt="">
+                <img :src="movie.Poster" alt="">
 
-                <div class="movie-type"> Action, Drama</div>
+                <div class="movie-type"> {{movie.Type}}</div>
 
               </div>
 
 
               <div class="movie-detail">
-                <p class="movie-year">1978</p>
-                <h3>Super Man</h3>
+                <p class="movie-year">{{movie.Year}}</p>
+                <h3>{{movie.Title}}</h3>
               </div>
             </router-link>
           </div>
